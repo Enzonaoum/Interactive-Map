@@ -28,20 +28,65 @@ public void rotateButtonClicked(GButton source, GEvent event) { //_CODE_:rotateB
 public void canadaButtonClicked(GButton source, GEvent event) { //_CODE_:canadaButton:414473:
   url = "https://geology.com/world/canada-map.gif";
   xAxisSlider.setLimits(-175.0, -350.0, -400.0);
+  yAxisSlider.setLimits(-500.0, -250.0, -450.0);
 } //_CODE_:canadaButton:414473:
 
 public void backToMainMapButtonClicked(GButton source, GEvent event) { //_CODE_:backToMainMap:794620:
-url = "https://geology.com/world/world-map.gif";
-xAxisSlider.setLimits(-600.0, -350.0, -850.0);
+  url = "https://geology.com/world/world-map.gif";
+  xAxisSlider.setLimits(-600.0, -350.0, -850.0);
+  yAxisSlider.setLimits(-350.0, -250.0, -450.0);
 } //_CODE_:backToMainMap:794620:
 
 public void xAxisSliderChanged(GCustomSlider source, GEvent event) { //_CODE_:xAxisSlider:948027:
   x = xAxisSlider.getValueI();
 } //_CODE_:xAxisSlider:948027:
 
-public void custom_slider1_change1(GCustomSlider source, GEvent event) { //_CODE_:custom_slider1:980929:
-  println("custom_slider1 - GCustomSlider >> GEvent." + event + " @ " + millis());
-} //_CODE_:custom_slider1:980929:
+public void yAxisSliderChanged(GCustomSlider source, GEvent event) { //_CODE_:yAxisSlider:980929:
+  y = yAxisSlider.getValueI();
+} //_CODE_:yAxisSlider:980929:
+
+public void countrySelectorListClick(GDropList source, GEvent event) { //_CODE_:countrySelectorList:719815:
+  if (countrySelectorList.getSelectedIndex() == 0){
+    url = "https://geology.com/world/world-map.gif";
+    xy2dSlider.setLimitsX(-600.0, -350.0, -850.0);
+    xy2dSlider.setLimitsY(-350.0, -250.0, -450.0);
+    
+  }
+  if (countrySelectorList.getSelectedIndex() == 1){
+    url = "https://geology.com/world/canada-map.gif";
+    xy2dSlider.setLimitsX(-175.0, -350.0, -400.0);
+    xy2dSlider.setLimitsY(-500.0, -250.0, -450.0);
+  }
+  
+  if (countrySelectorList.getSelectedIndex() == 2){
+    url = "https://geology.com/world/france-map.gif";
+    xy2dSlider.setLimitsX(-175.0, -350.0, -550.0);
+    xy2dSlider.setLimitsY(-500.0, -250.0, -700.0);
+  }
+  
+  if (countrySelectorList.getSelectedIndex() == 3){
+    url = "https://geology.com/world/spain-map.gif";
+    xy2dSlider.setLimitsX(-175.0, -350.0, -550.0);
+    xy2dSlider.setLimitsY(-500.0, -250.0, -692.5);
+  }
+  
+  if (countrySelectorList.getSelectedIndex() == 4){
+    url = "https://geology.com/world/the-united-states-of-america-map.gif";
+    xy2dSlider.setLimitsX(-175.0, -350.0, -750.0);
+    xy2dSlider.setLimitsY(-500.0, -250.0, -452.5);
+  }
+  
+  if (countrySelectorList.getSelectedIndex() == 5){
+    url = "https://geology.com/world/canada-map.gif";
+    xy2dSlider.setLimitsX(-175.0, -350.0, -400.0);
+    xy2dSlider.setLimitsY(-500.0, -250.0, -450.0);
+  }
+} //_CODE_:countrySelectorList:719815:
+
+public void xy2dSliderChange(GSlider2D source, GEvent event) { //_CODE_:xy2dSlider:743199:
+  y = xy2dSlider.getValueYI();
+  x = xy2dSlider.getValueXI();
+} //_CODE_:xy2dSlider:743199:
 
 
 
@@ -67,16 +112,27 @@ public void createGUI(){
   backToMainMap.addEventHandler(this, "backToMainMapButtonClicked");
   xAxisSlider = new GCustomSlider(window1, 4, 49, 180, 45, "grey_blue");
   xAxisSlider.setShowValue(true);
-  xAxisSlider.setLimits(-600.0, -250.0, -950.0);
+  xAxisSlider.setLimits(-600.0, -350.0, -850.0);
   xAxisSlider.setNumberFormat(G4P.DECIMAL, 2);
   xAxisSlider.setOpaque(false);
   xAxisSlider.addEventHandler(this, "xAxisSliderChanged");
-  custom_slider1 = new GCustomSlider(window1, 49, 98, 180, 45, "grey_blue");
-  custom_slider1.setRotation(PI/2, GControlMode.CORNER);
-  custom_slider1.setLimits(0.5, 0.0, 1.0);
-  custom_slider1.setNumberFormat(G4P.DECIMAL, 2);
-  custom_slider1.setOpaque(false);
-  custom_slider1.addEventHandler(this, "custom_slider1_change1");
+  yAxisSlider = new GCustomSlider(window1, 49, 98, 180, 45, "grey_blue");
+  yAxisSlider.setShowValue(true);
+  yAxisSlider.setShowLimits(true);
+  yAxisSlider.setRotation(PI/2, GControlMode.CORNER);
+  yAxisSlider.setLimits(-350.0, -250.0, -450.0);
+  yAxisSlider.setNumberFormat(G4P.DECIMAL, 2);
+  yAxisSlider.setOpaque(false);
+  yAxisSlider.addEventHandler(this, "yAxisSliderChanged");
+  countrySelectorList = new GDropList(window1, 209, 99, 90, 220, 10, 10);
+  countrySelectorList.setItems(loadStrings("list_719815"), 0);
+  countrySelectorList.addEventHandler(this, "countrySelectorListClick");
+  xy2dSlider = new GSlider2D(window1, 54, 134, 146, 113);
+  xy2dSlider.setLimitsX(-850.0, -350.0, -850.0);
+  xy2dSlider.setLimitsY(-350.0, -250.0, -450.0);
+  xy2dSlider.setNumberFormat(G4P.DECIMAL, 2);
+  xy2dSlider.setOpaque(true);
+  xy2dSlider.addEventHandler(this, "xy2dSliderChange");
   window1.loop();
 }
 
@@ -87,4 +143,6 @@ GButton rotateButton;
 GButton canadaButton; 
 GButton backToMainMap; 
 GCustomSlider xAxisSlider; 
-GCustomSlider custom_slider1; 
+GCustomSlider yAxisSlider; 
+GDropList countrySelectorList; 
+GSlider2D xy2dSlider; 

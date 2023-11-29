@@ -1,7 +1,7 @@
 import g4p_controls.*;
 PImage webImg;
 int x = -350;  
-int y = -250;
+int y = -350;
 float i;
 String url = "https://geology.com/world/world-map.gif";
 
@@ -16,5 +16,5 @@ void draw() {
   background(0);
   translate(width/2, height/2);
   rotateZ(radians(i));
-  image(webImg, x, -250);  
+  image(webImg, x, y);  
 }
