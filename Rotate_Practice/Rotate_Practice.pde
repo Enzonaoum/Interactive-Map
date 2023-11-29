@@ -1,7 +1,7 @@
 import g4p_controls.*;
 PImage webImg;
 int x = -350;  
-int y = -350;
+int y = -250;
 float i;
 String url = "https://geology.com/world/world-map.gif";
 
@@ -18,3 +18,9 @@ void draw() {
   rotateZ(radians(i));
   image(webImg, x, y);  
 }
+
+//void pinPointMarker {
+  //PVector mousePos = new PVector(mouseX, mouseY);
+  //fill(255, 0, 0);
+  //rect(mouseX, mouseY, mouseX + 2, mouseY);
+//}
