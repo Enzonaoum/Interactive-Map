@@ -3,24 +3,24 @@ PImage webImg;
 int x = -350;  
 int y = -250;
 float i;
+Boolean ss = false;
 String url = "https://geology.com/world/world-map.gif";
 
 void setup(){
   background(0);
   size(700, 500, P3D);
   createGUI();
+  frameRate(240);
 }
 
 void draw() {
-  webImg = loadImage(url, "gif");
   background(0);
+  webImg = loadImage(url, "gif");
   translate(width/2, height/2);
   rotateZ(radians(i));
-  image(webImg, x, y);  
+  image(webImg, xy2dSlider.getValueXI(), xy2dSlider.getValueYI());  
+  if(ss == true){
+    saveFrame("SS's/Image-####.png");
+    ss = false;
+  }
 }
-
-//void pinPointMarker {
-  //PVector mousePos = new PVector(mouseX, mouseY);
-  //fill(255, 0, 0);
-  //rect(mouseX, mouseY, mouseX + 2, mouseY);
-//}
